@@ -1,76 +1,60 @@
+<script>
+    function validateForm() {
+      
+      document.getElementById("fullNameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("phoneError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
 
-function validateFullName() {
-  const fullName = document.getElementById("fullName").value;
-  const regex = /^[A-Za-z\s]+$/;
-  const errorElement = document.getElementById("fullNameError");
-  if (!regex.test(fullName)) {
-    errorElement.textContent = "Full Name should contain only alphabetic characters and spaces.";
-    return false;
-  } else {
-    errorElement.textContent = "";
-    return true;
-  }
-}
+      document.getElementById("fullName").classList.remove('error');
+      document.getElementById("email").classList.remove('error');
+      document.getElementById("phone").classList.remove('error');
+      document.getElementById("password").classList.remove('error');
 
+      const fullName = document.getElementById("fullName").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
 
-function validateEmail() {
-  const email = document.getElementById("email").value;
-  const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  const errorElement = document.getElementById("emailError");
-  if (!regex.test(email)) {
-    errorElement.textContent = "Please enter a valid email address.";
-    return false;
-  } else {
-    errorElement.textContent = "";
-    return true;
-  }
-}
+      let valid = true;
 
+      
+      const fullNameRegex = /^[a-zA-Z\s]+$/;
+      if (!fullNameRegex.test(fullName)) {
+        document.getElementById("fullNameError").textContent = "Full name should contain only letters and spaces.";
+        document.getElementById("fullName").classList.add('error');
+        valid = false;
+      }
 
-function validatePhone() {
-  const phone = document.getElementById("phone").value;
-  const regex = /^[0-9]{10,15}$/;
-  const errorElement = document.getElementById("phoneError");
-  if (!regex.test(phone)) {
-    errorElement.textContent = "Phone number must be between 10 and 15 digits.";
-    return false;
-  } else {
-    errorElement.textContent = "";
-    return true;
-  }
-}
+      
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById("emailError").textContent = "Please enter a valid email address.";
+        document.getElementById("email").classList.add('error');
+        valid = false;
+      }
 
+      
+      const phoneRegex = /^\d{10,15}$/;
+      if (!phoneRegex.test(phone)) {
+        document.getElementById("phoneError").textContent = "Phone number must be 10-15 digits.";
+        document.getElementById("phone").classList.add('error');
+        valid = false;
+      }
 
-function validatePassword() {
-  const password = document.getElementById("password").value;
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  const errorElement = document.getElementById("passwordError");
-  if (!regex.test(password)) {
-    errorElement.textContent = "Password must be at least 8 characters long and include 1 uppercase letter, 1 lowercase letter, and 1 number.";
-    return false;
-  } else {
-    errorElement.textContent = "";
-    return true;
-  }
-}
+      
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        document.getElementById("passwordError").textContent = "Your Password must be at least 8 characters, with 1 uppercase, 1 lowercase, and 1 number.";
+        document.getElementById("password").classList.add('error');
+        valid = false;
+      }
 
-
-function validateForm() {
-  const isFullNameValid = validateFullName();
-  const isEmailValid = validateEmail();
-  const isPhoneValid = validatePhone();
-  const isPasswordValid = validatePassword();
-
+    
+      if (valid) {
+        document.getElementById("successful).style.display = "block";
+      }
+    }
   
-  if (isFullNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
-    document.getElementById("successMessage").style.display = "block";
-    return false; 
-  }
+  </script>
 
-  return false; 
-}
-
-document.getElementById("fullName").addEventListener("input", validateFullName);
-document.getElementById("email").addEventListener("input", validateEmail);
-document.getElementById("phone").addEventListener("input", validatePhone);
-document.getElementById("password").addEventListener("input", validatePassword);
