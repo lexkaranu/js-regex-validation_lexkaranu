@@ -54,22 +54,21 @@ function validatePassword() {
   }
 }
 
-// validation functions
+
 function validateForm() {
   const isFullNameValid = validateFullName();
   const isEmailValid = validateEmail();
   const isPhoneValid = validatePhone();
   const isPasswordValid = validatePassword();
 
-  // If all fields are valid, display success message
+  
   if (isFullNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
     document.getElementById("successMessage").style.display = "block";
-    return false; // Prevent form submission
+    return false; 
   }
 
-  return false; // Prevent form submission if any field is invalid
+  return false; 
 }
-
 
 document.getElementById("fullName").addEventListener("input", validateFullName);
 document.getElementById("email").addEventListener("input", validateEmail);
